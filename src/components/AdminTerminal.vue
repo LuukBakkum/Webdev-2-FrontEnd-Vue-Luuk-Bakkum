@@ -11,13 +11,11 @@
     <div id="overview-container">
         <div>
             <h1>C.R.U.D</h1>
-
             <div class="grid-container">
                 <!-- Library Table -->
                 <div>
                     <h2>Library</h2>
                     <table class="table-responsive mb-4" id="libraryDataTable">
-                        <!-- table rows for library here -->
                         <th>ID</th>
                         <th>User ID</th>
                         <th>Movie ID</th>
@@ -45,7 +43,6 @@
                 <div>
                     <h2>Movie</h2>
                     <table class="table-responsive mb-4" id="movieDataTable">
-                        <!-- table rows for movies here -->
                         <th>ID</th>
                         <th>Title</th>
                         <th>Description</th>
@@ -69,15 +66,12 @@
                         </tr>
                     </table>
                     <button class="btn btn-success" @click="this.addMovieModal.open()">Add Movie</button>
-                    <!-- <button @click="updateMovie">Update</button>
-                    <button @click="deleteMovie">Delete</button> -->
                 </div>
 
                 <!-- Serie Table -->
                 <div>
                     <h2>Serie</h2>
                     <table class="table-responsive mb-0" id="serieDataTable">
-                        <!-- table rows for series here -->
                         <th>ID</th>
                         <th>Title</th>
                         <th>Description</th>
@@ -102,12 +96,9 @@
                         </tr>
                     </table>
                     <button class="btn btn-success" @click="this.addSerieModal.open()">Add Serie</button>
-                    <!-- <button @click="updateSerie">Update</button>
-                    <button @click="deleteSerie">Delete</button> -->
                 </div>
 
                 <!-- User Table -->
-                <!--WEET NIET ZEKER OF IK WIL DAT HET DEHASHED IS-->
                 <div>
                     <h2>User</h2>
                     <table class="table-responsive mb-0" id="userDataTable">
@@ -156,10 +147,13 @@
             </div>
             <div class="form-group">
                 <label for="addPrice">Price</label>
-                <input type="number" class="form-control" id="addPrice" v-model="newOrder.price">
+                <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" id="addPrice"
+                    v-model="newOrder.price">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <label type="error">{{ error }}</label>
+            <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+                {{ this.errorMessage }}
+            </div>
         </form>
     </Modal>
 
@@ -183,20 +177,22 @@
                 <input type="number" class="form-control" id="updatePrice" v-model="selectedOrder.price">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <label type="error">{{ error }}</label>
+            <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+                {{ this.errorMessage }}
+            </div>
         </form>
     </Modal>
 
     <!-- Delete Library Item Modal -->
     <Modal ref="deleteLibraryModal" id="deleteLibraryModal" title="Delete Library Item: {{ selectedOrder.id }}">
-
         <h5 class="modal-title" id="deleteLibraryModalLabel">Delete Library Item</h5>
-        Are you sure you want to delete this item? This action cannot be undone.
+        <p>Are you sure you want to delete this item? This action cannot be undone.</p>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-danger" @click="deleteLibrary">Delete</button>
-        <label type="error">{{ error }}</label>
+        <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+            {{ this.errorMessage }}
+        </div>
     </Modal>
-
 
     <!-- Add Movie Modal -->
     <Modal ref="addMovieModal" id="addMovieModal" title="Add Movie">
@@ -222,7 +218,9 @@
                 <input type="number" class="form-control" id="addMovieMovie_id" v-model="newMovie.movie_id">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <label type="error">{{ error }}</label>
+            <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+                {{ this.errorMessage }}
+            </div>
         </form>
     </Modal>
 
@@ -250,17 +248,21 @@
                 <input type="number" class="form-control" id="updateMovieMovie_id" v-model="selectedMovie.movie_id">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <label type="error">{{ error }}</label>
+            <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+                {{ this.errorMessage }}
+            </div>
         </form>
     </Modal>
 
     <!-- Delete Movie Modal -->
     <Modal ref="deleteMovieModal" id="deleteMovieModal" title="Delete Movie">
         <h5 class="modal-title" id="deleteMovieModalLabel">Delete Movie</h5>
-        Are you sure you want to delete this movie? This action cannot be undone.
+        <p>Are you sure you want to delete this movie? This action cannot be undone.</p>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-danger" @click="deleteMovie">Delete</button>
-        <label type="error">{{ error }}</label>
+        <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+            {{ this.errorMessage }}
+        </div>
     </Modal>
 
     <!-- Add Serie Modal -->
@@ -287,7 +289,9 @@
                 <input type="number" class="form-control" id="addSerieSerie_id" v-model="newSerie.serie_id">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <label type="error">{{ error }}</label>
+            <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+                {{ this.errorMessage }}
+            </div>
         </form>
     </Modal>
 
@@ -315,17 +319,21 @@
                 <input type="number" class="form-control" id="updateSerieSerie_id" v-model="selectedSerie.serie_id">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <label type="error">{{ error }}</label>
+            <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+                {{ this.errorMessage }}
+            </div>
         </form>
     </Modal>
 
     <!-- Delete Serie Modal -->
     <Modal ref="deleteSerieModal" id="deleteSerieModal" title="Delete Serie">
         <h5 class="modal-title" id="deleteSerieModalLabel">Delete Serie</h5>
-        Are you sure you want to delete this serie? This action cannot be undone.
+        <p>Are you sure you want to delete this serie? This action cannot be undone.</p>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-danger" @click="deleteSerie">Delete</button>
-        <label type="error">{{ error }}</label>
+        <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+            {{ this.errorMessage }}
+        </div>
     </Modal>
 
     <!-- Add User Modal -->
@@ -349,7 +357,9 @@
                 <input type="checkbox" id="updateUserRole" v-model="newUser.admin">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <label type="error">{{ error }}</label>
+            <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+                {{ this.errorMessage }}
+            </div>
         </form>
     </Modal>
 
@@ -372,24 +382,22 @@
                 <label for="updateUserRole">Admin</label>
                 <input type="checkbox" id="updateUserRole" v-model="selectedUser.admin">
             </div>
-            <!-- <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="dropdownCheck">
-        <label class="form-check-label" for="dropdownCheck">
-          Remember me
-        </label>
-      </div> -->
             <button type="submit" class="btn btn-primary">Submit</button>
-            <label type="error">{{ error }}</label>
+            <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+                {{ this.errorMessage }}
+            </div>
         </form>
     </Modal>
 
     <!-- Delete User Modal -->
     <Modal ref="deleteUserModal" id="deleteUserModal" title="Delete User">
         <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
-        Are you sure you want to delete this user? This action cannot be undone.
+        <p>Are you sure you want to delete this user? This action cannot be undone.</p>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-danger" @click="deleteUser">Delete</button>
-        <label type="error">{{ error }}</label>
+        <div class="alert alert-danger mt-3" role="alert" v-if="errorMessage">
+            {{ this.errorMessage }}
+        </div>
     </Modal>
 </template>
 
@@ -409,6 +417,7 @@ export default {
             movies: [],
             series: [],
             users: [],
+
             //selected id's
             selectedOrderId: null,
             selectedMovieId: null,
@@ -428,7 +437,7 @@ export default {
             newUser: {},
 
             //error
-            error: null,
+            errorMessage: null,
         };
     },
     setup() {
@@ -448,7 +457,6 @@ export default {
         const addUserModal = ref(null);
         const updateUserModal = ref(null);
         const deleteUserModal = ref(null);
-
 
         return {
             addLibraryModal,
@@ -488,7 +496,7 @@ export default {
                 })
                 .catch(error => {
                     console.error(error);
-                    this.error = error;
+                    this.errorMessage = error;
                 });
         },
         selectOrder(id, order) {
@@ -496,53 +504,70 @@ export default {
             this.selectedOrder = order;
         },
         addLibrary() {
-            // Create an array containing the new order
-            this.error = null;
-            if (this.newOrder.price == null) {
-                this.$toast.error("Please enter the price", { position: "top" });
-                this.error = "Please enter the price";
+            this.errorMessage = null;
+            if (!this.checkLibraryInput(this.newOrder)) {
                 return;
             }
-//.trim proberen
-            if ((this.newOrder.movie_id != null && this.newOrder.movie_id != "" && this.newOrder.serie_id != null && this.newOrder.serie_id != "") ||
-                (this.newOrder.movie_id == null || this.newOrder.movie_id == "" && this.newOrder.serie_id == null || this.newOrder.serie_id == "")) {
-                this.$toast.error("Please fill in only one of the fields: movie_id or serie_id", { position: "top" });
-                this.error = "Please fill in only one of the fields: movie_id or serie_id";
-                return;
-            }
-
+            this.checkLibraryInput(this.newOrder);
             const newOrder = [this.newOrder];
-            // implement your add library logic
             movieKnightAPI.post('orders', newOrder)
                 .then(response => {
-                    // handle response
                     this.$toast.warning("This is the response: " + response, { position: "top" });
                     this.$toast.success("New user added", { position: "top" });
-                    this.addLibraryModal.close();  // assuming that .close() method will close the modal
+                    this.addLibraryModal.close();
                     this.getLibrary();
+                    this.newOrder = {
+                        user_id: null,
+                        movie_id: null,
+                        serie_id: null,
+                        price: null,
+                    };
                 })
                 .catch(error => {
-                    // handle error
-                    this.error = error;
+                    this.errorMessage = error;
                 });
+        },
+        checkLibraryInput(checkOrder){
+            if (checkOrder.user_id == null && checkOrder.movie_id == null && checkOrder.serie_id == null && checkOrder.price == null) {
+                this.$toast.error("Please fill in the fields", { position: "top" });
+                this.errorMessage = "Please fill in the fields";
+                return;
+            }
+            if (checkOrder.user_id == null) {
+                this.$toast.error("Please enter the user_id", { position: "top" });
+                this.errorMessage = "Please enter the user_id";
+                return;
+            }
+            if ((checkOrder.movie_id && checkOrder.serie_id) || (!checkOrder.movie_id && !checkOrder.serie_id)) {
+                this.errorMessage = "Please fill in only one of the fields: movie_id or serie_id";
+                return;
+            }
+            if (checkOrder.price == null) {
+                this.$toast.error("Please enter the price", { position: "top" });
+                this.errorMessage = "Please enter the price";
+                return;
+            }//.trim proberen
         },
         updateLibrary() {
             if (this.selectedOrderId) {
-                // You can access form data using this.selectedUser here
-                // To process the data, you could, for example, make an API request to update the user
+                this.errorMessage = null;
+                if (!this.checkLibraryInput(this.selectedOrder)) {
+                    return;
+                }
                 movieKnightAPI.put('orders/' + this.selectedOrderId, this.selectedOrder)
                     .then(response => {
-                        // handle response
                         this.$toast.success("Library item updated", { position: "top" });
-                        this.updateOrderModal.close();  // assuming that .close() method will close the modal
+                        this.updateLibraryModal.close();
+                        this.selectOrder = {
+                            user_id: null,
+                            movie_id: null,
+                            serie_id: null,
+                            price: null,
+                        };
                     })
                     .catch(error => {
-                        // handle error
-                        this.error = error;
+                        this.errorMessage = error;
                     });
-
-                // Use this.selectedOrderId for your update logic
-                // this.$toast.warning("You are now updating order item: " + this.selectedOrderId, { position: "top" });
             }
         },
         deleteLibrary() {
@@ -550,19 +575,14 @@ export default {
 
                 movieKnightAPI.delete('orders/' + this.selectedOrderId)
                     .then(response => {
-                        // handle response
                         this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Library item deleted", { position: "top" });
-                        this.deleteUserModal.close();  // assuming that .close() method will close the modal
+                        this.deleteLibraryModal.close();
                         this.getLibrary();
                     })
                     .catch(error => {
-                        // handle error
-                        this.error = error;
+                        this.errorMessage = error;
                     });
-
-                // Use this.selectedOrderId for your delete logic
-                // this.$toast.error("You are now deleting order item: " + this.selectedOrderId, { position: "top" });
             }
         },
         getMovies() {
@@ -572,16 +592,16 @@ export default {
                     this.movies = response.data.map(movie => ({
                         id: movie.id,
                         title: movie.title,
-                        price: movie.price, // voeg gewoon zelf de prijs toe
+                        price: movie.price,
                         description: movie.description,
                         image: movie.image,
                         movie_id: movie.movie_id,
-                        showFullDescription: false // Add this line
+                        showFullDescription: false
                     }));
                 })
                 .catch(error => {
                     console.error(error);
-                    this.error = error;
+                    this.errorMessage = error;
                 });
         },
         selectMovie(id, movie) {
@@ -589,61 +609,98 @@ export default {
             this.selectedMovie = movie;
         },
         addMovie() {
-
+            this.errorMessage = null;
+            if (!this.checkMovieInput(this.newMovie)) {
+                return;
+            }            
             movieKnightAPI.post('movies', this.newMovie)
                 .then(response => {
-                    // handle response
                     this.$toast.warning("This is the response: " + response, { position: "top" });
                     this.$toast.success("New movie added", { position: "top" });
-                    this.addMovieModal.close();  // assuming that .close() method will close the modal
+                    this.addMovieModal.close();
                     this.getMovies();
+                    this.newMovie = {
+                        title: '',
+                        price: '',
+                        description: '',
+                        image: '',
+                        movie_id: '',
+                    };
                 })
                 .catch(error => {
-                    // handle error
-                    this.error = error;
+                    this.errorMessage = error;
                 });
-
-            // implement your add movie logic
-            // this.$toast.success("You are now adding a new movie", { position: "top" });
+        },
+        checkMovieInput(checkMovie){
+            if (checkMovie.title == null && checkMovie.price == null && checkMovie.description == null && checkMovie.image == null && checkMovie.movie_id == null) {
+                this.$toast.error("Please fill in at least one of the fields", { position: "top" });
+                this.errorMessage = "Please fill in at least one of the fields";
+                return false;
+            }
+            if (checkMovie.title == null) {
+                this.$toast.error("Please enter the title", { position: "top" });
+                this.errorMessage = "Please enter the title";
+                return false;
+            }
+            if (checkMovie.price == null) {
+                this.$toast.error("Please enter the price", { position: "top" });
+                this.errorMessage = "Please enter the price";
+                return false;
+            }
+            if (checkMovie.description == null) {
+                this.$toast.error("Please enter the description", { position: "top" });
+                this.errorMessage = "Please enter the description";
+                return false;
+            }
+            if (checkMovie.image == null) {
+                this.$toast.error("Please enter the image", { position: "top" });
+                this.errorMessage = "Please enter the image";
+                return false;
+            }
+            if (checkMovie.movie_id == null) {
+                this.$toast.error("Please enter the movie_id", { position: "top" });
+                this.errorMessage = "Please enter the movie_id";
+                return false;
+            }
+            return true;
         },
         updateMovie() {
             if (this.selectedMovieId) {
-                // Use this.selectedMovieId for your update logic
-
-
+                this.errorMessage = null;
+                if (!this.checkMovieInput(this.selectedMovie)) {
+                    return;
+                }
                 movieKnightAPI.put('movies/' + this.selectedMovieId, this.selectedMovie)
                     .then(response => {
-                        // handle response
                         this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Movie updated", { position: "top" });
-                        this.updateMovieModal.close();  // assuming that .close() method will close the modal
+                        this.updateMovieModal.close();
                         this.getMovies();
+                        this.selectedMovie = {
+                            title: '',
+                            price: '',
+                            description: '',
+                            image: '',
+                            movie_id: '',
+                        };
                     })
                     .catch(error => {
-                        // handle error
-                        this.error = error;
+                        this.errorMessage = error;
                     });
-
-                // this.$toast.warning("You are now updating movie: " + this.selectedMovieId, { position: "top" });
             }
         },
         deleteMovie() {
             if (this.selectedMovieId) {
-                // Use this.selectedMovieId for your delete logic
                 movieKnightAPI.delete('movies/' + this.selectedMovieId)
                     .then(response => {
-                        // handle response
                         this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Movie deleted", { position: "top" });
-                        this.deleteMovieModal.close();  // assuming that .close() method will close the modal
+                        this.deleteMovieModal.close();
                         this.getMovies();
                     })
                     .catch(error => {
-                        // handle error
-                        this.error = error;
+                        this.errorMessage = error;
                     });
-
-                // this.$toast.error("You are now deleting movie: " + this.selectedMovieId, { position: "top" });
             }
         },
         getSeries() {
@@ -653,16 +710,16 @@ export default {
                     this.series = response.data.map(serie => ({
                         id: serie.id,
                         title: serie.title,
-                        price: serie.price, // voeg gewoon zelf de prijs toe
+                        price: serie.price,
                         description: serie.description,
                         image: serie.image,
                         serie_id: serie.serie_id,
-                        showFullDescription: false // Add this line
+                        showFullDescription: false
                     }));
                 })
                 .catch(error => {
                     console.error(error);
-                    this.error = error;
+                    this.errorMessage = error;
                 });
         },
         selectSerie(id, serie) {
@@ -670,61 +727,98 @@ export default {
             this.selectedSerie = serie;
         },
         addSerie() {
-            // implement your add serie logic
-
+            this.errorMessage = null;
+            if (!this.checkSerieInput(this.newSerie)) {
+                return;
+            }
             movieKnightAPI.post('series', this.newSerie)
                 .then(response => {
-                    // handle response
                     this.$toast.warning("This is the response: " + response, { position: "top" });
                     this.$toast.success("New serie added", { position: "top" });
-                    this.addSerieModal.close();  // assuming that .close() method will close the modal
+                    this.addSerieModal.close();
                     this.getSeries();
+                    this.newSerie = {
+                        title: "",
+                        price: "",
+                        description: "",
+                        image: "",
+                        serie_id: ""
+                    };
                 })
                 .catch(error => {
-                    // handle error
-                    this.error = error;
+                    this.errorMessage = error;
                 });
-
-            // this.$toast.success("You are now adding a new serie", { position: "top" });
+        },
+        checkSerieInput(checkSerie){
+            if (checkSerie.title == null && checkSerie.price == null && checkSerie.description == null && checkSerie.image == null && checkSerie.serie_id == null) {
+                this.$toast.error("Please enter the title, price, description, image and serie_id", { position: "top" });
+                this.errorMessage = "Please enter the title, price, description, image and serie_id";
+                return false;
+            }
+            if (checkSerie.title == null) {
+                this.$toast.error("Please enter the title", { position: "top" });
+                this.errorMessage = "Please enter the title";
+                return false;
+            }
+            if (checkSerie.price == null) {
+                this.$toast.error("Please enter the price", { position: "top" });
+                this.errorMessage = "Please enter the price";
+                return false;
+            }
+            if (checkSerie.description == null) {
+                this.$toast.error("Please enter the description", { position: "top" });
+                this.errorMessage = "Please enter the description";
+                return false;
+            }
+            if (checkSerie.image == null) {
+                this.$toast.error("Please enter the image", { position: "top" });
+                this.errorMessage = "Please enter the image";
+                return false;
+            }
+            if (checkSerie.serie_id == null) {
+                this.$toast.error("Please enter the serie_id", { position: "top" });
+                this.errorMessage = "Please enter the serie_id";
+                return false;
+            }
+            return true;
         },
         updateSerie() {
             if (this.selectedSerieId) {
-                // Use this.selectedSerieId for your update logic
-
+                this.errorMessage = null;
+                if (!this.checkSerieInput(this.selectedSerie)) {
+                    return;
+                }
                 movieKnightAPI.put('series/' + this.selectedSerieId, this.selectedSerie)
                     .then(response => {
-                        // handle response
                         this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Serie updated", { position: "top" });
-                        this.updateSerieModal.close();  // assuming that .close() method will close the modal
+                        this.updateSerieModal.close();
                         this.getSeries();
+                        this.selectedSerie = {
+                            title: "",
+                            price: "",
+                            description: "",
+                            image: "",
+                            serie_id: ""
+                        };
                     })
                     .catch(error => {
-                        // handle error
-                        this.error = error;
+                        this.errorMessage = error;
                     });
-
-                // this.$toast.warning("You are now updating serie: " + this.selectedSerieId, { position: "top" });
             }
         },
         deleteSerie() {
             if (this.selectedSerieId) {
-                // Use this.selectedSerieId for your delete logic
-
                 movieKnightAPI.delete('series/' + this.selectedSerieId)
                     .then(response => {
-                        // handle response
                         this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Serie deleted", { position: "top" });
-                        this.deleteSerieModal.close();  // assuming that .close() method will close the modal
+                        this.deleteSerieModal.close();
                         this.getSeries();
                     })
                     .catch(error => {
-                        // handle error
-                        this.error = error;
+                        this.errorMessage = error;
                     });
-
-                // this.$toast.error("You are now deleting serie: " + this.selectedSerieId, { position: "top" });
             }
         },
         getUsers() {
@@ -741,7 +835,7 @@ export default {
                 })
                 .catch(error => {
                     console.error(error);
-                    this.error = error;
+                    this.errorMessage = error;
                 });
         },
         selectUser(id, user) {
@@ -749,73 +843,88 @@ export default {
             this.selectedUser = user;
         },
         addUser() {
-            // implement your add user logic
-            this.error = null;
-            if (!this.newUser.username || !this.newUser.password || !this.newUser.email) {
-                // All fields are required.
-                this.error = 'All fields are required.';
+            this.errorMessage = null;
+            if (!this.checkUserInput(this.newUser)) {
                 return;
             }
-
             this.newUser.admin = this.newUser.admin ? 1 : 0;
             movieKnightAPI.post('users', this.newUser)
                 .then(response => {
-                    // handle response
                     this.$toast.warning("This is the response: " + response, { position: "top" });
                     this.$toast.success("New user added", { position: "top" });
-                    this.addUserModal.close();  // assuming that .close() method will close the modal
+                    this.addUserModal.close();
                     this.getUsers();
+                    this.newUser = {
+                        username: '',
+                        password: '',
+                        email: '',
+                        admin: false
+                    };
                 })
                 .catch(error => {
-                    // handle error
-                    this.error = error;
+                    this.errorMessage = error;
                 });
-
-            // this.$toast.success("You are now adding a new user", { position: "top" });
+        },
+        checkUserInput(checkUser){
+            if (checkUser.username == null && checkUser.password == null && checkUser.email == null) {
+                this.$toast.error("Please enter the username, password and email", { position: "top" });
+                this.errorMessage = "Please enter the username, password and email";
+                return false;
+            }
+            if (checkUser.username == null) {
+                this.$toast.error("Please enter the username", { position: "top" });
+                this.errorMessage = "Please enter the username";
+                return false;
+            }
+            if (checkUser.password == null) {
+                this.$toast.error("Please enter the password", { position: "top" });
+                this.errorMessage = "Please enter the password";
+                return false;
+            }
+            if (checkUser.email == null) {
+                this.$toast.error("Please enter the email", { position: "top" });
+                this.errorMessage = "Please enter the email";
+                return false;
+            }
+            return true;
         },
         updateUser() {
             if (this.selectedUserId) {
-                // Use this.selectedUserId for your update logic
-                this.error = null;
-                if (!this.selectedUser.username || !this.selectedUser.password || !this.selectedUser.email) {
-                    // All fields are required.
-                    this.error = 'All fields are required.';
+                this.errorMessage = null;
+                if (!this.checkUserInput(this.selectedUser)) {
                     return;
                 }
 
                 this.selectedUser.admin = this.selectedUser.admin ? 1 : 0;
                 movieKnightAPI.put('users/' + this.selectedUserId, this.selectedUser)
                     .then(response => {
-                        // handle response
                         this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("User updated", { position: "top" });
-                        this.updateUserModal.close();  // assuming that .close() method will close the modal
+                        this.updateUserModal.close();
                         this.getUsers();
+                        this.selectedUser = {
+                            username: '',
+                            password: '',
+                            email: '',
+                            admin: false
+                        };
                     })
                     .catch(error => {
-                        // handle error
-                        this.error = error;
+                        this.errorMessage = error;
                     });
-
-                // this.$toast.warning("You are now updating user: " + this.selectedUserId, { position: "top" });
             }
         },
         deleteUser(user) {
             if (this.selectedUserId) {
-                // Use this.selectedUserId for your delete logic
                 movieKnightAPI.delete('users/' + this.selectedUserId)
                     .then(response => {
-                        // handle response
                         this.$toast.success("User deleted", { position: "top" });
-                        this.deleteUserModal.close();  // assuming that .close() method will close the modal
+                        this.deleteUserModal.close();
                         this.getUsers();
                     })
                     .catch(error => {
-                        // handle error
-                        this.error = error;
+                        this.errorMessage = error;
                     });
-
-                // this.$toast.error("You are now deleting user: " + this.selectedUserId + ", topper: " + user.username, { position: "top" });
             }
         },
     },

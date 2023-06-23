@@ -92,28 +92,14 @@
         </div>
     </div>
 
-    <!-- <p>{{ jwt }}</p>
-    <div v-for="item in cart" :key="item.id">
-        <div class="row">
-            <div class="col-4">
-                <img :src="item.image" alt="product image" class="img-fluid">
-            </div>
-            <div class="col-8">
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.description }}</p>
-                <p>Price: €{{ item.price }}</p>
-                <button class="btn btn-danger" @click="deleteItem(item.id)">Delete</button>
-            </div>
-        </div>
-    </div> -->
-
+    
     <Modal ref="modalRef">
         <div>
             <h1>Payment Complete</h1>
             <h5>You made a very good choice!</h5>
             <p>Your products have been activated in your personal library.</p>
             <p>Enjoy your movie night!</p>
-
+            
             <button type="button" class="btn btn-success btn-md btn-wide" @click="goToLibrary">
                 Go to my library
             </button>
@@ -122,8 +108,22 @@
             </button>
         </div>
     </Modal>
+<!-- <p>{{ jwt }}</p>
+<div v-for="item in cart" :key="item.id">
+    <div class="row">
+        <div class="col-4">
+            <img :src="item.image" alt="product image" class="img-fluid">
+        </div>
+        <div class="col-8">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <p>Price: €{{ item.price }}</p>
+            <button class="btn btn-danger" @click="deleteItem(item.id)">Delete</button>
+        </div>
+    </div>
+</div> -->
 </template>
-  
+
 <script>
 // import '../assets/css/cart.css';
 

@@ -66,7 +66,7 @@ export default {
 
         async function handleLogin() {
             try {
-                store.login(formData);
+                await store.login(formData);
                 router.push('/');
             } catch (error) {
                 errorMessage.value = error;
@@ -75,7 +75,7 @@ export default {
 
         async function register(registerData) {
             try {
-                store.register(registerData);
+                await store.register(registerData);
                 router.push('/');
             } catch (error) {
                 errorMessage.value = error;
