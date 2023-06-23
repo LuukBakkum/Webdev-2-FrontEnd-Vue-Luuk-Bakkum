@@ -37,9 +37,6 @@
 </template>
 
 <script>
-// import Navigation from '@/assets/js/navigation.js'
-// export default Navigation;
-
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import LoginModal from './Login.vue';
@@ -65,7 +62,7 @@ export default {
     }
 
     function handleLogout() {
-      store.logout();  // logout method to be defined in your auth store
+      store.logout();
       console.log(isAuthenticated.value, userName.value);
       router.push('/');
     }
@@ -73,7 +70,7 @@ export default {
     return {
       loginModalRef,
       openLoginModal,
-      isAuthenticated, // And here
+      isAuthenticated,
       isAdmin,
       userName,
       handleLogout,

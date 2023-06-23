@@ -11,7 +11,6 @@ export const userAuthStore = defineStore('auth', {
     }),
     getters: {
         isAuthenticated: (state) => state.jwt !== '',
-        // isAdmin: (state) => state.isAdmin === true
     },
     actions: {
         autoLogin() {
@@ -28,7 +27,6 @@ export const userAuthStore = defineStore('auth', {
             return new Promise((resolve, reject) => {
                 movieKnightAPI.post('/login', formData)
                     .then((response) => {
-                        // Basic response checks
                         if (!response || response.status !== 200 || !response.data) {
                             reject('Invalid response from server.');
                             return;

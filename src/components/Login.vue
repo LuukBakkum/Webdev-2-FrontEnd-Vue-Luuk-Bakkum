@@ -3,7 +3,7 @@
         <div v-if="!isRegister">
             <h1>Login</h1>
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label><!--OF GEWOON USERNAME MAKEN?-->
+                <label for="username" class="form-label">Username</label>
                 <input v-model="formData.username" type="text" class="form-control" id="username" placeholder="helloWorld">
                 <label for="password" class="form-label">Password</label>
                 <input v-model="formData.password" type="password" id="inputPassword" class="form-control"
@@ -25,7 +25,7 @@
             <div class="mb-3">
                 <label for="inputEmail" class="form-label">Email</label>
                 <input v-model="registerData.email" type="email" class="form-control" id="inputEmail" placeholder="topleraar@inholland.nl">
-                <label for="inputUsername" class="form-label">Username</label><!--OF GEWOON USERNAME MAKEN?-->
+                <label for="inputUsername" class="form-label">Username</label>
                 <input v-model="registerData.username" type="text" class="form-control" id="inputUsername" placeholder="helloWorld">
                 <label for="inputPassword" class="form-label">Password</label>
                 <input v-model="registerData.password" type="password" id="inputPassword" class="form-control" aria-labelledby="passwordHelpBlock">

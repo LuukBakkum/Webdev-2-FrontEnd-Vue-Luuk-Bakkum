@@ -91,7 +91,6 @@
             </div>
         </div>
     </div>
-
     
     <Modal ref="modalRef">
         <div>
@@ -108,25 +107,9 @@
             </button>
         </div>
     </Modal>
-<!-- <p>{{ jwt }}</p>
-<div v-for="item in cart" :key="item.id">
-    <div class="row">
-        <div class="col-4">
-            <img :src="item.image" alt="product image" class="img-fluid">
-        </div>
-        <div class="col-8">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-            <p>Price: €{{ item.price }}</p>
-            <button class="btn btn-danger" @click="deleteItem(item.id)">Delete</button>
-        </div>
-    </div>
-</div> -->
 </template>
 
 <script>
-// import '../assets/css/cart.css';
-
 import { ref, onMounted, nextTick } from 'vue';
 import Modal from './Modal.vue';
 import { userAuthStore } from '../stores/auth-store';
@@ -169,10 +152,6 @@ export default {
             cart.items = localCart;
         });
 
-        const goToCheckout = () => {
-            // implement your checkout logic here
-        };
-
         return {
             isAuthenticated,
             jwt,
@@ -180,7 +159,7 @@ export default {
             totalPrice,
             paymentDate,
             goToCheckout,
-            modalRef, // This is now accessible to use as `this.modalRef` in the rest of your component
+            modalRef,
         };
     },
     methods: {
@@ -214,8 +193,8 @@ export default {
                 movieKnightAPI.post('orders', orders)
                     .then((response) => {
                         console.log(response);
-                        this.cart.splice(0, this.cart.length); // Clears the cart by removing all elements
-                        localStorage.setItem('cart', JSON.stringify(this.cart)); // Update the local storage
+                        this.cart.splice(0, this.cart.length);
+                        localStorage.setItem('cart', JSON.stringify(this.cart));
                         resolve(response);
                     })
                     .catch((error) => {
@@ -231,8 +210,3 @@ export default {
 <style scoped>
 @import '../assets/css/cart.css';
 </style>
-
-<!-- cart: this.cart,
-totalPrice: this.totalPrice,
-paymentMethod: this.selectedPaymentMethod,
-paymentDate: this.paymentDate, -->

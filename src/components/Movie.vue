@@ -36,7 +36,6 @@
   </div>
 </template>
   
-<!-- // import Movie from '@/assets/js/movie.js' -->
 <script>
 import axios from 'axios';
 import movieKnightAPI from '../axios-auth';
@@ -59,11 +58,11 @@ export default {
           this.movies = response.data.map(movie => ({
             id: movie.id,
             title: movie.title,
-            price: movie.price, // voeg gewoon zelf de prijs toe
+            price: movie.price,
             description: movie.description,
             image: movie.image,
             movie_id: movie.movie_id,
-            showFullDescription: false // Add this line
+            showFullDescription: false
           }));
         })
         .catch(error => {
@@ -71,13 +70,9 @@ export default {
         });
     },
     addToCart(movie) {
-      // Check if the cart already exists in localStorage
       let cart = localStorage.getItem('cart');
-
-      // Parse it back to an array if it exists, or use an empty array if it doesn't
       cart = cart ? JSON.parse(cart) : [];
 
-      // Check if the movie is already in the cart
       let found = false;
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].movie_id === movie.movie_id) {
@@ -86,14 +81,10 @@ export default {
         }
       }
 
-      // Only add the movie if it's not already in the cart
       if (!found) {
         cart.push(movie);
-
-        // Store it back in localStorage, stringifying it to store as a string
         localStorage.setItem('cart', JSON.stringify(cart));
 
-        // Show the toast notification
         this.$toast.success(`${movie.title} has been added to your cart.`, { position: "top" });
       } else {
         this.$toast.show(`${movie.title} is already in your cart.`, { position: "top" });
@@ -115,32 +106,3 @@ export default {
 </script>
   
 <style></style>
-
-
-<!-- getMovies() {
-  const apiKey = 'ec3431508ecf1ac6cbc4cc3a576afbb1';
-  const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYzM0MzE1MDhlY2YxYWM2Y2JjNGNjM2E1NzZhZmJiMSIsInN1YiI6IjY0NWE5YTFhZmUwNzdhNWNhYmQxNDU4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BvPsrTaTIjK-y6q-I50aLxbvYQYN-daU06UGFPLW1yY';
-  axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&page=3&sort_by=vote_count.desc`, {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'accept': 'application/json'
-    }
-  })
-    .then(response => {
-      this.movies = response.data.results.map(movie => ({
-        title: movie.title,
-        image: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-        description: movie.overview,
-        movie_id: movie.id,
-        showFullDescription: false // Add this line
-      }));
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}, -->
-
-<!-- Dit heeft de film id: {{ movie.id }}
-Dit heeft de film image: {{ movie.image }}
-Dit heeft de film title: {{ movie.title }}
-Dit heeft de film description: {{ movie.description }} -->

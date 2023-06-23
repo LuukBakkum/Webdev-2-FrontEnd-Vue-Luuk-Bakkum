@@ -8,13 +8,6 @@
         </div>
     </div>
     <div id="overview-container">
-        <!-- <div v-for="(order, index) in orders" :key="index">
-                <p>{{ order.id }}</p>
-                <p>{{ order.user_id }}</p>
-                <p>{{ order.movie_id }}</p>
-                <p>{{ order.serie_id }}</p>
-                <p>{{ order.price }}</p>
-            </div> -->
         <div class="section">
             <h2>Movies</h2>
             <div class="container">

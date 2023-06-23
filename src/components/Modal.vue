@@ -42,7 +42,6 @@ export default {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent background */
 }
 
 .modal-content {
@@ -52,7 +51,6 @@ export default {
     padding: 20px;
     border-radius: 8px;
     max-width: 50%;
-    /* Or change to the specific width you want */
     box-sizing: border-box;
 }
 

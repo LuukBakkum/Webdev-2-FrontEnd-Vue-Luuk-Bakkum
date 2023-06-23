@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router' //PAS DE NAMEN NOG AAN
+import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/HomeView.vue';
 import Movies from '../views/MovieView.vue';
@@ -6,7 +6,6 @@ import Series from '../views/SerieView.vue';
 import Cart from '../views/CartView.vue';
 import Library from '../views/LibraryView.vue';
 import Admin from '../views/AdminTerminalView.vue';
-// import ProductList from '../components/products/ProductList.vue';//AANPASSEN
 
 const routes = [
   { path: '/', component: Home },
