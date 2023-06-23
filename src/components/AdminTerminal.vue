@@ -512,7 +512,6 @@ export default {
             const newOrder = [this.newOrder];
             movieKnightAPI.post('orders', newOrder)
                 .then(response => {
-                    this.$toast.warning("This is the response: " + response, { position: "top" });
                     this.$toast.success("New user added", { position: "top" });
                     this.addLibraryModal.close();
                     this.getLibrary();
@@ -529,24 +528,22 @@ export default {
         },
         checkLibraryInput(checkOrder){
             if (checkOrder.user_id == null && checkOrder.movie_id == null && checkOrder.serie_id == null && checkOrder.price == null) {
-                this.$toast.error("Please fill in the fields", { position: "top" });
                 this.errorMessage = "Please fill in the fields";
-                return;
+                return false;
             }
             if (checkOrder.user_id == null) {
-                this.$toast.error("Please enter the user_id", { position: "top" });
                 this.errorMessage = "Please enter the user_id";
-                return;
+                return false;
             }
             if ((checkOrder.movie_id && checkOrder.serie_id) || (!checkOrder.movie_id && !checkOrder.serie_id)) {
                 this.errorMessage = "Please fill in only one of the fields: movie_id or serie_id";
-                return;
+                return false;
             }
             if (checkOrder.price == null) {
-                this.$toast.error("Please enter the price", { position: "top" });
                 this.errorMessage = "Please enter the price";
-                return;
-            }//.trim proberen
+                return false;
+            }
+            return true;
         },
         updateLibrary() {
             if (this.selectedOrderId) {
@@ -575,7 +572,6 @@ export default {
 
                 movieKnightAPI.delete('orders/' + this.selectedOrderId)
                     .then(response => {
-                        this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Library item deleted", { position: "top" });
                         this.deleteLibraryModal.close();
                         this.getLibrary();
@@ -615,7 +611,6 @@ export default {
             }            
             movieKnightAPI.post('movies', this.newMovie)
                 .then(response => {
-                    this.$toast.warning("This is the response: " + response, { position: "top" });
                     this.$toast.success("New movie added", { position: "top" });
                     this.addMovieModal.close();
                     this.getMovies();
@@ -633,32 +628,26 @@ export default {
         },
         checkMovieInput(checkMovie){
             if (checkMovie.title == null && checkMovie.price == null && checkMovie.description == null && checkMovie.image == null && checkMovie.movie_id == null) {
-                this.$toast.error("Please fill in at least one of the fields", { position: "top" });
                 this.errorMessage = "Please fill in at least one of the fields";
                 return false;
             }
             if (checkMovie.title == null) {
-                this.$toast.error("Please enter the title", { position: "top" });
                 this.errorMessage = "Please enter the title";
                 return false;
             }
             if (checkMovie.price == null) {
-                this.$toast.error("Please enter the price", { position: "top" });
                 this.errorMessage = "Please enter the price";
                 return false;
             }
             if (checkMovie.description == null) {
-                this.$toast.error("Please enter the description", { position: "top" });
                 this.errorMessage = "Please enter the description";
                 return false;
             }
             if (checkMovie.image == null) {
-                this.$toast.error("Please enter the image", { position: "top" });
                 this.errorMessage = "Please enter the image";
                 return false;
             }
             if (checkMovie.movie_id == null) {
-                this.$toast.error("Please enter the movie_id", { position: "top" });
                 this.errorMessage = "Please enter the movie_id";
                 return false;
             }
@@ -672,7 +661,6 @@ export default {
                 }
                 movieKnightAPI.put('movies/' + this.selectedMovieId, this.selectedMovie)
                     .then(response => {
-                        this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Movie updated", { position: "top" });
                         this.updateMovieModal.close();
                         this.getMovies();
@@ -693,7 +681,6 @@ export default {
             if (this.selectedMovieId) {
                 movieKnightAPI.delete('movies/' + this.selectedMovieId)
                     .then(response => {
-                        this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Movie deleted", { position: "top" });
                         this.deleteMovieModal.close();
                         this.getMovies();
@@ -733,7 +720,6 @@ export default {
             }
             movieKnightAPI.post('series', this.newSerie)
                 .then(response => {
-                    this.$toast.warning("This is the response: " + response, { position: "top" });
                     this.$toast.success("New serie added", { position: "top" });
                     this.addSerieModal.close();
                     this.getSeries();
@@ -751,32 +737,26 @@ export default {
         },
         checkSerieInput(checkSerie){
             if (checkSerie.title == null && checkSerie.price == null && checkSerie.description == null && checkSerie.image == null && checkSerie.serie_id == null) {
-                this.$toast.error("Please enter the title, price, description, image and serie_id", { position: "top" });
                 this.errorMessage = "Please enter the title, price, description, image and serie_id";
                 return false;
             }
             if (checkSerie.title == null) {
-                this.$toast.error("Please enter the title", { position: "top" });
                 this.errorMessage = "Please enter the title";
                 return false;
             }
             if (checkSerie.price == null) {
-                this.$toast.error("Please enter the price", { position: "top" });
                 this.errorMessage = "Please enter the price";
                 return false;
             }
             if (checkSerie.description == null) {
-                this.$toast.error("Please enter the description", { position: "top" });
                 this.errorMessage = "Please enter the description";
                 return false;
             }
             if (checkSerie.image == null) {
-                this.$toast.error("Please enter the image", { position: "top" });
                 this.errorMessage = "Please enter the image";
                 return false;
             }
             if (checkSerie.serie_id == null) {
-                this.$toast.error("Please enter the serie_id", { position: "top" });
                 this.errorMessage = "Please enter the serie_id";
                 return false;
             }
@@ -790,7 +770,6 @@ export default {
                 }
                 movieKnightAPI.put('series/' + this.selectedSerieId, this.selectedSerie)
                     .then(response => {
-                        this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Serie updated", { position: "top" });
                         this.updateSerieModal.close();
                         this.getSeries();
@@ -811,7 +790,6 @@ export default {
             if (this.selectedSerieId) {
                 movieKnightAPI.delete('series/' + this.selectedSerieId)
                     .then(response => {
-                        this.$toast.warning("This is the response: " + response, { position: "top" });
                         this.$toast.success("Serie deleted", { position: "top" });
                         this.deleteSerieModal.close();
                         this.getSeries();
@@ -850,7 +828,6 @@ export default {
             this.newUser.admin = this.newUser.admin ? 1 : 0;
             movieKnightAPI.post('users', this.newUser)
                 .then(response => {
-                    this.$toast.warning("This is the response: " + response, { position: "top" });
                     this.$toast.success("New user added", { position: "top" });
                     this.addUserModal.close();
                     this.getUsers();
@@ -867,22 +844,18 @@ export default {
         },
         checkUserInput(checkUser){
             if (checkUser.username == null && checkUser.password == null && checkUser.email == null) {
-                this.$toast.error("Please enter the username, password and email", { position: "top" });
                 this.errorMessage = "Please enter the username, password and email";
                 return false;
             }
             if (checkUser.username == null) {
-                this.$toast.error("Please enter the username", { position: "top" });
                 this.errorMessage = "Please enter the username";
                 return false;
             }
             if (checkUser.password == null) {
-                this.$toast.error("Please enter the password", { position: "top" });
                 this.errorMessage = "Please enter the password";
                 return false;
             }
             if (checkUser.email == null) {
-                this.$toast.error("Please enter the email", { position: "top" });
                 this.errorMessage = "Please enter the email";
                 return false;
             }
@@ -898,7 +871,7 @@ export default {
                 this.selectedUser.admin = this.selectedUser.admin ? 1 : 0;
                 movieKnightAPI.put('users/' + this.selectedUserId, this.selectedUser)
                     .then(response => {
-                        this.$toast.warning("This is the response: " + response, { position: "top" });
+                        // this.$toast.warning("This is the response: " + response.data, { position: "top" });
                         this.$toast.success("User updated", { position: "top" });
                         this.updateUserModal.close();
                         this.getUsers();
