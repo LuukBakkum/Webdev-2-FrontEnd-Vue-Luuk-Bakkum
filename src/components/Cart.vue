@@ -158,7 +158,6 @@ export default {
             cart: computed(() => cart.items),
             totalPrice,
             paymentDate,
-            goToCheckout,
             modalRef,
         };
     },
