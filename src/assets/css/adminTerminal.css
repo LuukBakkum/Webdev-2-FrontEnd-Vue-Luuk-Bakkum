@@ -1,0 +1,68 @@
+#titleField {
+    width: 100%;
+    height: 250px;
+    background-color: #707070;
+    border: none;
+    top: 0px;
+    position: absolute;
+    top: 50px;
+}
+
+#title {
+    background-color: #1f1f1f;
+    color: white;
+    margin-top: 70px;
+    margin-left: 50px;
+    width: 40%;
+    height: 120px;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+#overview-container {
+    display: flex;
+    gap: 20px;
+    margin: 20px auto;
+    margin-top: 250px;
+    margin-left: 0px;
+    margin-right: 0px;
+
+    max-width: auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* This creates two columns. Adjust the number of '1fr's to adjust columns */
+    justify-items: center; /* Align grid items along the row axis */
+    background-color: lightgray;
+}
+
+.table-container {
+    /* No changes necessary here, but you can add styles if needed */
+}
+
+.table-responsive {
+    background-color: white;
+width: 48vw;
+}
+
+.table-responsive th {
+    background-color: darkgray;
+    /* border: 1px solid black; */
+    width: auto;
+    max-width: 100px;
+}
+
+.table-responsive td {
+    border: 1px solid black;
+    width: auto;
+    max-width: 100px;
+    height: 20px;
+    overflow: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: nowrap;
+}

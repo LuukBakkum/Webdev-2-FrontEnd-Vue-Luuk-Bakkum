@@ -1,0 +1,28 @@
+#navigation{
+    /* top: 0;
+    left: 0; */
+    font-size: 20px;
+    position: fixed;
+    height: 50px !important;
+    color: #ffffff;
+    flex-direction: row;
+}
+#navTitle{
+    color: #ffffff;
+}
+
+.top-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+}
+
+.bottom-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* z-index: 1030; */
+}
